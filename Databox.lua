@@ -81,6 +81,13 @@ function p.databox(frame)
         useImage = argsLocal["useImage"]
     end
 
+    local excludeProperties = {}
+    if argsLocal.excludeProperties then
+		for item in string.gmatch(argsLocal.excludeProperties, "[^,]+") do
+          table.insert(excludeProperties, item)
+        end
+    end
+
     local lang = mw.language.getContentLanguage()
     local item = mw.wikibase.getEntity(itemId)
 
@@ -159,12 +166,13 @@ function p.databox(frame)
     local properties = mw.wikibase.orderProperties(item:getProperties())
     local property_blacklist_hash = valuesToKeys(property_blacklist)
     property_blacklist_hash['P31'] = true --Special property
+    local excludeProperties_hash = valuesToKeys(excludeProperties)
 
 	local edit_message = mw.message.new('vector-view-edit'):plain()
     for _, property in pairs(properties) do
         local datatype = item.claims[property][1].mainsnak.datatype
         local valueCount = #item:getBestStatements(property)
-        if datatype ~= 'commonsMedia' and datatype ~= 'external-id' and datatype ~= 'quantity' and datatype ~= 'wikibase-property' and datatype ~= 'geo-shape' and datatype ~= 'tabular-data' and not property_blacklist_hash[property] and valueCount > 0 and valueCount <= 5 then
+        if datatype ~= 'commonsMedia' and datatype ~= 'external-id' and datatype ~= 'quantity' and datatype ~= 'wikibase-property' and datatype ~= 'geo-shape' and datatype ~= 'tabular-data' and not property_blacklist_hash[property] and not excludeProperties_hash[property] and valueCount > 0 and valueCount <= 5 then
             local propertyValue = item:formatStatements(property)
             dataTable:tag('tr')
                 :tag('th')
