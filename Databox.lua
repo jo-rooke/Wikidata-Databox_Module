@@ -68,18 +68,27 @@ local p = {}
 
 function p.databox(frame)
     local args = frame:getParent().args
+    local argsLocal = frame.args
+
     local itemId = nil
     if args.item then
         itemId = args.item
     end
+
+    local argsLocal = frame.args
+    local useImage = nil
+    if argsLocal.useImage then
+        useImage = argsLocal["useImage"]
+    end
+
     local lang = mw.language.getContentLanguage()
     local item = mw.wikibase.getEntity(itemId)
-    
+
     if item == nil then
         mw.addWarning("Wikidata item not found")
         return ""
     end
-    
+
     local databoxRoot = mw.html.create('div')
         :addClass('infobox')
         :css({
@@ -102,12 +111,30 @@ function p.databox(frame)
         })
         :wikitext(item:getLabel() or mw.title.getCurrentTitle().text)
 
-     --Image
-    local images = item:getBestStatements('P18')
-    if #images >= 1 then
+    --Image
+    local databoxImage = nil
+    if useImage and useImage ~= "" then
+        local allWikidataImages = item:getAllStatements('P6')
+        if #allWikidataImages >= 1 then
+            for _, image in ipairs( allWikidataImages ) do
+                if image.mainsnak.datavalue.value == useImage then
+                    databoxImage = useImage
+                    break
+                end
+            end
+        end
+    end
+    if databoxImage == nil then
+		local bestWikidataImages = item:getBestStatements('P6')
+		if #bestWikidataImages >= 1 then
+			databoxImage = bestWikidataImages[1].mainsnak.datavalue.value
+		end
+	end
+
+    if databoxImage then
         databoxRoot
             :tag('div')
-            :wikitext('[[File:' .. images[1].mainsnak.datavalue.value .. '|frameless|300px]]')
+            :wikitext('[[File:' .. databoxImage .. '|frameless|300px]]')
     end
 
     --Table
@@ -120,7 +147,7 @@ function p.databox(frame)
             ['width'] = '100%',
             ['table-layout'] = 'fixed',
         })
-    
+
     dataTable:tag('caption')
              :css({
              	['background-color'] = '#f5f5f5',
@@ -128,7 +155,7 @@ function p.databox(frame)
              	['margin-top'] = '0.2em',
              })
     		 :wikitext(item:formatStatements('P31').value)
-  
+
     local properties = mw.wikibase.orderProperties(item:getProperties())
     local property_blacklist_hash = valuesToKeys(property_blacklist)
     property_blacklist_hash['P31'] = true --Special property
@@ -148,7 +175,7 @@ function p.databox(frame)
                     :wikitext('&nbsp;[[File:OOjs UI icon edit-ltr.svg|' .. edit_message .. '|12px|baseline|class=noviewer|link=https://www.wikidata.org/wiki/' .. item.id .. '#' .. property .. ']]')
         end
     end
-     
+
      --Map
     local coordinates_statements = item:getBestStatements('P625')
     if #coordinates_statements >= 1 and coordinates_statements[1].mainsnak.datavalue and coordinates_statements[1].mainsnak.datavalue.value.globe == 'http://www.wikidata.org/entity/Q2' then
@@ -177,7 +204,7 @@ function p.databox(frame)
             zoom = zoom
         }))
      end
-     
+
      return tostring(databoxRoot)
 end
 
