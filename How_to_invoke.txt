@@ -1,1 +1,1 @@
-{{Databox}}
+{{Databox|useImage=Hubble Ultra Deep Field part d.jpg}}
