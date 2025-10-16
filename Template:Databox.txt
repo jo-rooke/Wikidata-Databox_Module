@@ -1,1 +1,1 @@
-{{#invoke:Databox|databox}}
+ {{#invoke:Databox|databox|useImage={{{useImage|}}}}}
