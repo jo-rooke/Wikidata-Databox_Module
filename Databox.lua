@@ -121,7 +121,7 @@ function p.databox(frame)
     --Image
     local databoxImage = nil
     if useImage and useImage ~= "" then
-        local allWikidataImages = item:getAllStatements('P6')
+        local allWikidataImages = item:getAllStatements('P18')
         if #allWikidataImages >= 1 then
             for _, image in ipairs( allWikidataImages ) do
                 if image.mainsnak.datavalue.value == useImage then
@@ -132,7 +132,7 @@ function p.databox(frame)
         end
     end
     if databoxImage == nil then
-		local bestWikidataImages = item:getBestStatements('P6')
+		local bestWikidataImages = item:getBestStatements('P18')
 		if #bestWikidataImages >= 1 then
 			databoxImage = bestWikidataImages[1].mainsnak.datavalue.value
 		end
