@@ -33,6 +33,10 @@ Its basic algorithm is:
 ** Use default [[<tvar name="mw-ext-wikibasecl">mw:Extension:Wikibase client</tvar>|Wikibase]] rendering system to display the values that have the "best" [[<tvar name="ranking">Help:Ranking</tvar>|rank]] (i.e. the values with the rank "[[<tvar name="prefrank">Help:Ranking#Preferred_rank</tvar>|preferred]]", if some exists, and, if not, the ones with the rank "[[<tvar name="normrank">Help:Ranking#Normal_rank</tvar>|normal]]").
 * If there is value for {{P|625}}, then display a map using [[<tvar name="mw-ext-kart">mw:Help:Extension:Kartographer</tvar>|Kartographer]].
 
+It is possible to use two parameters to adjust the Databox.
+* To specify a different image from the wikidata item to appear in the Databox: <code><nowiki>{{Databox|useImage=Hubble Ultra Deep Field part d.jpg}}</nowiki></code>
+* To exclude certain properties from appearing in the Databox: <code><nowiki>{{Databox|excludeProperties=P2,P1}}</nowiki></code>
+
 === Notes === <!--T:7-->
 </translate>
 <references group=a/>
@@ -42,7 +46,7 @@ Its basic algorithm is:
 <!--T:9-->
 # Copy the code of <code>Module:Databox</code> in a module page in your wiki named <code>Module:Databox</code>.
 # Add the created module page to the sitelinks of [[Q53931871]].
-# Create <code>Template:Databox</code> in your wiki with the wikitext: <code><nowiki>{{#invoke:Databox|databox}}</nowiki></code>.
+# Create <code>Template:Databox</code> in your wiki with the wikitext: <code><nowiki>{{#invoke:Databox|databox|useImage={{{useImage|}}}|excludeProperties={{{excludeProperties|}}}}}</nowiki></code>.
 # Add the created template page to the sitelinks of [[Q20702632]].
 # At this point if you add <code><nowiki>{{Databox}}</nowiki></code> to an existing article connected to a Wikidata item it should work.
 # Write a help page in your language
