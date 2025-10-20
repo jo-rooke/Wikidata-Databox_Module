@@ -213,6 +213,18 @@ function p.databox(frame)
         }))
      end
 
+     --Wikidata Link
+    databoxRoot:tag('div')
+        :css({
+            ['text-align'] = 'left',
+            padding = '0.2em 0',
+            margin = '0.1em 0',
+            ['font-size'] = '90%',
+            ['width'] = '100%',
+        })
+        :wikitext('&nbsp;[[File:Wikidata-logo.svg|20px|class=noviewer|link=https://www.wikidata.org/wiki/' .. item.id .. ']]')
+        :wikitext('&nbsp;[[d:' .. item.id .. '|From Wikidata]]')
+
      return tostring(databoxRoot)
 end
 
