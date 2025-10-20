@@ -184,7 +184,7 @@ function p.databox(frame)
         end
     end
 
-     --Map
+    --Map
     local coordinates_statements = item:getBestStatements('P625')
     if #coordinates_statements >= 1 and coordinates_statements[1].mainsnak.datavalue and coordinates_statements[1].mainsnak.datavalue.value.globe == 'http://www.wikidata.org/entity/Q2' then
         --We build the call to mapframe
@@ -211,9 +211,9 @@ function p.databox(frame)
             longitude = longitude,
             zoom = zoom
         }))
-     end
+    end
 
-     --Wikidata Link
+    --Wikidata Link
     databoxRoot:tag('div')
         :css({
             ['text-align'] = 'left',
@@ -225,7 +225,7 @@ function p.databox(frame)
         :wikitext('&nbsp;[[File:Wikidata-logo.svg|20px|class=noviewer|link=https://www.wikidata.org/wiki/' .. item.id .. ']]')
         :wikitext('&nbsp;[[d:' .. item.id .. '|From Wikidata]]')
 
-     return tostring(databoxRoot)
+    return tostring(databoxRoot)
 end
 
 return p
