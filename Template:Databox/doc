@@ -24,14 +24,18 @@ It uses the Wikidata item linked to the current page or the item which id is fil
 <!--T:6-->
 Its basic algorithm is:
 * Use the label of the item or, if none exists, the title of the page for the infobox title.
-* Use the value of {{P|18}} for the main image.
+* Use the value of `useImage`, if provided, or else the first 'best' ranked {{P|18}} for the main image.
 * Use the value(s) of {{P|31}} for the data table title.
-* Take all the properties used by the item, sort them according to [[<tvar name="wikibase">MediaWiki:Wikibase-SortedProperties</tvar>]], and for each one:
+* Take all the properties used by the item, removing any properties from the 'excludeProperties' list, then sort them according to [[<tvar name="wikibase">MediaWiki:Wikibase-SortedProperties</tvar>]], and for each one:
 ** If the property has the datatype {{datatype|external-id}}, {{datatype|commonsMedia}} or {{datatype|quantity}}<ref group=a>The current display of quantities by Wikibase is very limited, this filter should be removed after improvements</ref>, do not display anything.
 ** If the property is in the <code>property_blacklist</code> array of the module, do not display anything (it is done in order to filter properties not very relevant for displaying in infoboxes).
 ** If the property has more than 5 values do not display anything (to avoid long lists in the infobox).
 ** Use default [[<tvar name="mw-ext-wikibasecl">mw:Extension:Wikibase client</tvar>|Wikibase]] rendering system to display the values that have the "best" [[<tvar name="ranking">Help:Ranking</tvar>|rank]] (i.e. the values with the rank "[[<tvar name="prefrank">Help:Ranking#Preferred_rank</tvar>|preferred]]", if some exists, and, if not, the ones with the rank "[[<tvar name="normrank">Help:Ranking#Normal_rank</tvar>|normal]]").
 * If there is value for {{P|625}}, then display a map using [[<tvar name="mw-ext-kart">mw:Help:Extension:Kartographer</tvar>|Kartographer]].
+
+It is possible to use two optional parameters to adjust the Databox.
+* To specify a different image from the wikidata item to appear in the Databox: <code><nowiki>{{Databox|useImage=Hubble Ultra Deep Field part d.jpg}}</nowiki></code>
+* To exclude certain properties from appearing in the Databox: <code><nowiki>{{Databox|excludeProperties=P2,P1}}</nowiki></code>
 
 === Notes === <!--T:7-->
 </translate>
@@ -42,7 +46,7 @@ Its basic algorithm is:
 <!--T:9-->
 # Copy the code of <code>Module:Databox</code> in a module page in your wiki named <code>Module:Databox</code>.
 # Add the created module page to the sitelinks of [[Q53931871]].
-# Create <code>Template:Databox</code> in your wiki with the wikitext: <code><nowiki>{{#invoke:Databox|databox}}</nowiki></code>.
+# Create <code>Template:Databox</code> in your wiki with the wikitext: <code><nowiki>{{#invoke:Databox|databox|useImage={{{useImage|}}}|excludeProperties={{{excludeProperties|}}}}}</nowiki></code>.
 # Add the created template page to the sitelinks of [[Q20702632]].
 # At this point if you add <code><nowiki>{{Databox}}</nowiki></code> to an existing article connected to a Wikidata item it should work.
 # Write a help page in your language
