@@ -26,7 +26,7 @@ Its basic algorithm is:
 * Use the label of the item or, if none exists, the title of the page for the infobox title.
 * Use the value of `useImage`, if provided, or else the first 'best' ranked {{P|18}} for the main image.
 * Use the value(s) of {{P|31}} for the data table title.
-* Take all the properties used by the item, sort them according to [[<tvar name="wikibase">MediaWiki:Wikibase-SortedProperties</tvar>]], and for each one:
+* Take all the properties used by the item, removing any properties from the 'excludeProperties' list, then sort them according to [[<tvar name="wikibase">MediaWiki:Wikibase-SortedProperties</tvar>]], and for each one:
 ** If the property has the datatype {{datatype|external-id}}, {{datatype|commonsMedia}} or {{datatype|quantity}}<ref group=a>The current display of quantities by Wikibase is very limited, this filter should be removed after improvements</ref>, do not display anything.
 ** If the property is in the <code>property_blacklist</code> array of the module, do not display anything (it is done in order to filter properties not very relevant for displaying in infoboxes).
 ** If the property has more than 5 values do not display anything (to avoid long lists in the infobox).
