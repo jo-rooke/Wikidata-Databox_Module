@@ -226,7 +226,7 @@ function p.databox(frame)
             :css({
                 margin = '0.05em 0 0 0',
             })
-            :wikitext('&nbsp;[[d:' .. item.id .. '|From Wikidata]]')
+            :wikitext('&nbsp;[[d:' .. item.id .. '|<span title="The information in this section originates from Wikidata. Click to visit this article\'s Wikidata page">From Wikidata</span>]]')
 
     return tostring(databoxRoot)
 end
