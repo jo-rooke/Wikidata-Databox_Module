@@ -54,17 +54,17 @@ It is possible to use two optional parameters to adjust the Databox.
 == Examples == <!--T:10-->
 
 </translate>
-{{{!}} class="wikitable" 
+{{{!}} class="wikitable"
 {{!}} {{Databox/sandbox|item=Q10725594}} {{Databox/sandbox|item=Q13365715}}
 {{!}} {{Databox/sandbox|item=Q153}}
-{{!}} {{Databox/sandbox|item=Q2513}}
+{{!}} {{Databox/sandbox|item=Q2513|useImage=1990 s31 IMAX view of HST release.jpg}}
 {{!}} {{Databox/sandbox|item=Q3030}}
 {{!}} {{Databox/sandbox|item=Q7066}}
 {{!-}}
 {{!}} {{Databox/sandbox|item=Q192724}}
 {{!}} {{Databox/sandbox|item=Q67}}
 {{!}} {{Databox/sandbox|item=Q143}}
-{{!}} {{Databox/sandbox|item=Q64}}
+{{!}} {{Databox/sandbox|item=Q64|excludeProperties=P8989}}
 {{!}} {{Databox/sandbox|item=Q42}}
 {{!}}}
 
