@@ -1,1 +1,1 @@
-<includeonly>{{#invoke:Databox/sandbox|databox}}</includeonly><noinclude>{{Documentation}}</noinclude>
+<includeonly>{{#invoke:Databox/sandbox|databox|useImage={{{useImage|}}}|excludeProperties={{{excludeProperties|}}}}}</includeonly><noinclude>{{Documentation}}</noinclude>
