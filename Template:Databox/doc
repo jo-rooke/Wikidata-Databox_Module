@@ -50,6 +50,7 @@ It is possible to use two optional parameters to adjust the Databox.
 # Add the created template page to the sitelinks of [[Q20702632]].
 # At this point if you add <code><nowiki>{{Databox}}</nowiki></code> to an existing article connected to a Wikidata item it should work.
 # Write a help page in your language
+# If you want to translate the From Wikidata link and it's rollover "Click to visit this.." you can edit these directly in the module code
 
 == Examples == <!--T:10-->
 
