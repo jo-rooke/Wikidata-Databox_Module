@@ -1,7 +1,8 @@
 -- A more extensive version is stored and documented at the Swedish Wikipedia site, sv.wikipedia.org/wiki/Modul:Databox
 -- It is supposed to work for any language.
 
-local property_blacklist = {
+-- Properties excluded for all Databoxes in this site
+local site_excluded_properties = {
     'P360', --is a list of
     'P4224', --category contains
     'P935', -- Commons gallery
@@ -81,6 +82,7 @@ function p.databox(frame)
         useImage = argsLocal["useImage"]
     end
 
+	-- excludeProperties is a parameter to exclude properties for a Databox on a specific page
     local excludeProperties = {}
     if argsLocal.excludeProperties then
 		for item in string.gmatch(argsLocal.excludeProperties, "[^,]+") do
@@ -164,15 +166,15 @@ function p.databox(frame)
     		 :wikitext(item:formatStatements('P31').value)
 
     local properties = mw.wikibase.orderProperties(item:getProperties())
-    local property_blacklist_hash = valuesToKeys(property_blacklist)
-    property_blacklist_hash['P31'] = true --Special property
+    local site_excluded_properties_hash = valuesToKeys(site_excluded_properties)
+    site_excluded_properties_hash['P31'] = true --Special property
     local excludeProperties_hash = valuesToKeys(excludeProperties)
 
 	local edit_message = mw.message.new('vector-view-edit'):plain()
     for _, property in pairs(properties) do
         local datatype = item.claims[property][1].mainsnak.datatype
         local valueCount = #item:getBestStatements(property)
-        if datatype ~= 'commonsMedia' and datatype ~= 'external-id' and datatype ~= 'quantity' and datatype ~= 'wikibase-property' and datatype ~= 'geo-shape' and datatype ~= 'tabular-data' and not property_blacklist_hash[property] and not excludeProperties_hash[property] and valueCount > 0 and valueCount <= 5 then
+        if datatype ~= 'commonsMedia' and datatype ~= 'external-id' and datatype ~= 'quantity' and datatype ~= 'wikibase-property' and datatype ~= 'geo-shape' and datatype ~= 'tabular-data' and not site_excluded_properties_hash[property] and not excludeProperties_hash[property] and valueCount > 0 and valueCount <= 5 then
             local propertyValue = item:formatStatements(property)
             dataTable:tag('tr')
                 :tag('th')
