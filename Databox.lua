@@ -82,7 +82,7 @@ function p.databox(frame)
         useImage = argsLocal["useImage"]
     end
 
-	-- excludeProperties is a parameter to exclude properties for a Databox on a specific page
+	-- excludeProperties is a local parameter to exclude given properties for a Databox on a specific page
     local excludeProperties = {}
     if argsLocal.excludeProperties then
 		for item in string.gmatch(argsLocal.excludeProperties, "[^,]+") do
