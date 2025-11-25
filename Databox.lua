@@ -1,7 +1,7 @@
 -- A more extensive version is stored and documented at the Swedish Wikipedia site, sv.wikipedia.org/wiki/Modul:Databox
 -- It is supposed to work for any language.
 
--- Properties excluded for all Databoxes in [SITE_NAME]
+-- Properties excluded for all Databoxes in this site 
 local site_excluded_properties = {
     'P360', --is a list of
     'P4224', --category contains
