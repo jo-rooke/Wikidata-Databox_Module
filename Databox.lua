@@ -223,6 +223,7 @@ function p.databox(frame)
             ['width'] = '100%',
             ['font-size'] = '90%',
         })
+        :addClass('databox-from-wikidata-link')
         :wikitext('&nbsp;[[File:Wikidata-logo.svg|22px|class=noviewer|link=https://www.wikidata.org/wiki/' .. item.id .. ']]')
         :tag('div')
             :css({
