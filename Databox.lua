@@ -158,6 +158,7 @@ function p.databox(frame)
         })
 
     dataTable:tag('caption')
+             :addClass('notheme')
              :css({
              	['background-color'] = '#f5f5f5',
              	['font-weight'] = 'bold',
@@ -182,7 +183,7 @@ function p.databox(frame)
                     :wikitext(lang:ucfirst(propertyValue.label)):done()
                 :tag('td')
                     :wikitext(frame:preprocess(propertyValue.value))
-                    :wikitext('&nbsp;[[File:OOjs UI icon edit-ltr.svg|' .. edit_message .. '|12px|baseline|class=noviewer|link=https://www.wikidata.org/wiki/' .. item.id .. '#' .. property .. ']]')
+                    :wikitext('&nbsp;[[File:OOjs UI icon edit-ltr.svg|' .. edit_message .. '|12px|baseline|class=noviewer skin-invert|link=https://www.wikidata.org/wiki/' .. item.id .. '#' .. property .. ']]')
         end
     end
 
